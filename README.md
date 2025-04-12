@@ -14,7 +14,7 @@ Mod was made to be compatible with other mods that change shop pricings, but I c
 
 ## Bugs and suggestions
 
-Feel free to contact me by electromail: `coop(at)dj-haski.ru`
+Feel free to open issue at [GitHub](https://github.com/DjHaski/AdvanceMyShop)!
 
 ## Credits
 
