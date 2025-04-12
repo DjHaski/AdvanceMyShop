@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AdvanceMyShop;
 [HarmonyPatch(typeof(ItemAttributes), "GetValue")]
-[HarmonyPriority(Priority.Low)]
+[HarmonyPriority(Priority.Last)]
 public class ItemAttributesPatch
 {
     private static float ApplyMultiplier(float source, float multiplier)
@@ -51,16 +51,20 @@ public class ItemAttributesPatch
 
         if (PluginConfig.individualApply.Value)
         {
-            finalPrice = ApplyMultiplier(finalPrice, PluginConfig.GetResultingMultiplier());
+            finalPrice = ApplyMultiplier(finalPrice, PluginConfig.NextAppliableMultiplier());
         }
         else if (ShopManagerPatch.shopWideDiscount != 0)
         {
             finalPrice = ApplyMultiplier(finalPrice, ShopManagerPatch.shopWideDiscount);
         }
 
-        if (PluginConfig.IsItemFree())
+        if (PluginConfig.WillBeItemFree())
         {
             finalPrice = 0f;
+        }
+        else if (PluginConfig.WillBeItemOverpriced())
+        {
+            finalPrice *= PluginConfig.overpricedItemMultiplier.Value;
         }
 
         __instance.value = Utils.NormalizePrice(finalPrice);

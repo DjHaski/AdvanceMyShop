@@ -10,15 +10,18 @@ class ShopManagerPatch
     public static int shopWideDiscount = 0;
     public static bool Prefix(ShopManager __instance)
     {
-        if (SemiFunc.IsMasterClientOrSingleplayer() && SemiFunc.RunIsShop() && !PluginConfig.individualApply.Value)
+        if (!SemiFunc.RunIsShop() || !SemiFunc.IsMasterClientOrSingleplayer())
+            return true;
+        
+        if (!PluginConfig.individualApply.Value)
         {
-            shopWideDiscount = (int) PluginConfig.GetResultingMultiplier();
+            shopWideDiscount = (int) PluginConfig.NextAppliableMultiplier();
             AdvanceMyShop.Logger.LogInfo($"Rolled shop wide multiplier is: {shopWideDiscount}%");
         }
         else
         {
             shopWideDiscount = 0;
-            AdvanceMyShop.Logger.LogInfo($"No shop wide multiplier is rolled.");
+            AdvanceMyShop.Logger.LogInfo($"No shop wide multiplier is rolled, individual discounts will be applied instead.");
         }
         return true;
     }
