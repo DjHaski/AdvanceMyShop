@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using BepInEx.Configuration;
 
 namespace AdvanceMyShop;
@@ -44,7 +45,7 @@ internal static class PluginConfig
 
         }
 
-        normalizedPercentages = Array.ConvertAll(percentages.Value.Split(','), s => Math.Clamp(float.Parse(s), 0, 100));
+        normalizedPercentages = Array.ConvertAll(percentages.Value.Split(','), s => Math.Clamp(float.Parse(s, CultureInfo.InvariantCulture), 0, 100));
     }
 
     public static float NextAppliableMultiplier()

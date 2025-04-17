@@ -1,3 +1,6 @@
+## 1.1.1
+- Fixed critical error due to culture info when parcing floats from config. Sorry but that.
+
 ## v1.1.0
 
 - Improved compatibility with other mods changing various multipliers? Idk
