@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AdvanceMyShop;
 
-[BepInPlugin("Dj_Haski.AdvanceMyShop", "AdvanceMyShop", "1.0")]
+[BepInPlugin("Dj_Haski.AdvanceMyShop", "AdvanceMyShop", "1.1.2")]
 public class AdvanceMyShop : BaseUnityPlugin
 {
     internal static AdvanceMyShop Instance { get; private set; } = null!;
@@ -24,7 +24,6 @@ public class AdvanceMyShop : BaseUnityPlugin
         this.gameObject.hideFlags = HideFlags.HideAndDontSave;
 
         Patch();
-
 
         Logger.LogInfo($"v{Info.Metadata.Version} is now injected in the game. Have fun :3");
     }

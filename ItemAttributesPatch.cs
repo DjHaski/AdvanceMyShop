@@ -3,6 +3,7 @@ using Photon.Pun;
 
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AdvanceMyShop;
 [HarmonyPatch(typeof(ItemAttributes), "GetValue")]
@@ -26,6 +27,7 @@ public class ItemAttributesPatch
         }
 
         var baseRandomizedPrice = Utils.GetRandomNumber(__instance.itemValueMin, __instance.itemValueMax);
+        baseRandomizedPrice = Math.Max(1000f, baseRandomizedPrice);
         var finalPrice = (float) __instance.value;
         if (finalPrice == 0)
         {
@@ -38,8 +40,8 @@ public class ItemAttributesPatch
                 case SemiFunc.itemType.healthPack:
                     finalPrice += finalPrice * ShopManager.instance.healthPackValueIncrease * RunManager.instance.levelsCompleted;
                     break;
-                case SemiFunc.itemType.player_upgrade:
-                    finalPrice += finalPrice * ShopManager.instance.upgradeValueIncrease * StatsManager.instance.GetItemsUpgradesPurchased(__instance.itemName);
+                case SemiFunc.itemType.item_upgrade:
+                    finalPrice += finalPrice * ShopManager.instance.upgradeValueIncrease * StatsManager.instance.GetItemsUpgradesPurchased(__instance.itemAssetName);
                     break;
                 default:
                     break;
@@ -67,7 +69,7 @@ public class ItemAttributesPatch
             finalPrice *= PluginConfig.overpricedItemMultiplier.Value;
         }
 
-        __instance.value = Utils.NormalizePrice(finalPrice);
+        __instance.value = (int) Mathf.Round(finalPrice / 1000f);
         if (GameManager.Multiplayer())
         {
             __instance.photonView.RPC("GetValueRPC", RpcTarget.Others, new object[1] { __instance.value });

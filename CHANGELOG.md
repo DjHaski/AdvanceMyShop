@@ -1,3 +1,7 @@
+## 1.1.2
+- Fixed bug with upgrades being priced at single rate, rather than scale with purchased amount. Thanks to @Ty7aN
+- Optimized base price calculation to match current game one.
+
 ## 1.1.1
 - Fixed critical error due to culture info when parcing floats from config. Sorry but that.
 
