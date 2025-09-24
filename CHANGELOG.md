@@ -1,3 +1,7 @@
+## 1.2.0
+- Updated price calculation to match current game one.
+- Added config entry `DisableVanillaPriceMultiplier`, which disables vanilla item value multiplier. Might be useful for someone.
+
 ## 1.1.2
 - Fixed bug with upgrades being priced at single rate, rather than scale with purchased amount. Thanks to @Ty7aN
 - Optimized base price calculation to match current game one.

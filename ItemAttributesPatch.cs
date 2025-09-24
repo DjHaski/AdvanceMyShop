@@ -3,6 +3,7 @@ using Photon.Pun;
 
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace AdvanceMyShop;
@@ -26,22 +27,25 @@ public class ItemAttributesPatch
             return true;
         }
 
-        var baseRandomizedPrice = Utils.GetRandomNumber(__instance.itemValueMin, __instance.itemValueMax);
-        baseRandomizedPrice = Math.Max(1000f, baseRandomizedPrice);
+        var baseValue = Utils.GetRandomNumber(__instance.itemValueMin, __instance.itemValueMax);
+        if (!PluginConfig.disableVanillaPriceMultiplier.Value)
+            baseValue *= ShopManager.instance.itemValueMultiplier;
+        baseValue = Mathf.Max(1000f, baseValue);
+
         var finalPrice = (float) __instance.value;
         if (finalPrice == 0)
         {
-            finalPrice = (float) Math.Round(ShopManager.instance.itemValueMultiplier * baseRandomizedPrice);
+            finalPrice = Mathf.Ceil(baseValue / 1000);
             switch (__instance.itemType)
             {
                 case SemiFunc.itemType.power_crystal:
-                    finalPrice += finalPrice * ShopManager.instance.crystalValueIncrease * RunManager.instance.levelsCompleted;
+                    finalPrice = ShopManager.instance.CrystalValueGet(finalPrice); 
                     break;
                 case SemiFunc.itemType.healthPack:
-                    finalPrice += finalPrice * ShopManager.instance.healthPackValueIncrease * RunManager.instance.levelsCompleted;
+                    finalPrice = ShopManager.instance.HealthPackValueGet(finalPrice);
                     break;
                 case SemiFunc.itemType.item_upgrade:
-                    finalPrice += finalPrice * ShopManager.instance.upgradeValueIncrease * StatsManager.instance.GetItemsUpgradesPurchased(__instance.itemAssetName);
+                    finalPrice = ShopManager.instance.UpgradeValueGet(finalPrice, __instance.item);
                     break;
                 default:
                     break;
@@ -69,7 +73,7 @@ public class ItemAttributesPatch
             finalPrice *= PluginConfig.overpricedItemMultiplier.Value;
         }
 
-        __instance.value = (int) Mathf.Round(finalPrice / 1000f);
+        __instance.value = (int) finalPrice;
         if (GameManager.Multiplayer())
         {
             __instance.photonView.RPC("GetValueRPC", RpcTarget.Others, new object[1] { __instance.value });

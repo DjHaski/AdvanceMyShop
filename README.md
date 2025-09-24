@@ -20,6 +20,7 @@ I strongly suggest to tailor those settings to your liking, because everyone see
 | General.FreeItemChance              | `0.5`                                     | Chance of a free item to occur. Works per item. Set to 0 to disable.                           |
 | General.OverpricedItemChance        | `0.5`                                     | Chance of an REALLY overpriced item to occur. Works per item. Set to 0 to disable.             |
 | General.OverpricedItemMultiplier     | `5`                                       | Multiplier applied to the overpriced item.                                                      |
+| General.DisableVanillaPriceMultiplier     | `false`                                       | If enabled, mod will ignore vanilla game item value multiplier. This might be useful for easier playthrough.                                                      |
 | Multipliers.BasePriceMultiplier      | `1`                                       | Base price multiplier applied to all items (e.g. price * multiplier). Set to 1 to disable.    |
 | Multipliers.MultiplierFor_[itemCategory] | `1`                                   | Multiplier applied to `[itemCategory]` items. Set to 1 to disable.                             |
 
@@ -28,6 +29,8 @@ I strongly suggest to tailor those settings to your liking, because everyone see
 Mod was made to be compatible with other mods that change shop pricings, however I can't guarantee it because of my "skill issue". If you encounter strange behaviour AFTER this mod have been installed, please report it.
 
 Mod was tested with `37` mods installed, including ones that change multipliers.
+
+Currently, it is known that AdvanceMyShop is incompatible with other mods that have similar or same functionality. You will have to choose who to keep ;)
 
 ## Bugs and suggestions
 

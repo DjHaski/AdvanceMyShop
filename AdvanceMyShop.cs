@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AdvanceMyShop;
 
-[BepInPlugin("Dj_Haski.AdvanceMyShop", "AdvanceMyShop", "1.1.2")]
+[BepInPlugin("Dj_Haski.AdvanceMyShop", "AdvanceMyShop", "1.2.0")]
 public class AdvanceMyShop : BaseUnityPlugin
 {
     internal static AdvanceMyShop Instance { get; private set; } = null!;

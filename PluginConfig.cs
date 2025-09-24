@@ -17,6 +17,7 @@ internal static class PluginConfig
     public static ConfigEntry<float> overpricedItemChance = null!;
     public static ConfigEntry<float> overpricedItemMultiplier = null!;
     public static float[] normalizedPercentages = null!;
+    public static ConfigEntry<bool> disableVanillaPriceMultiplier = null!;
 
     public static Dictionary<string, ConfigEntry<float>> itemMultipliers = new();
 
@@ -30,6 +31,8 @@ internal static class PluginConfig
         freeItemChance = config.Bind("General", "FreeItemChance", 0.5f, new ConfigDescription("Chance of a free item to occur. Works per item. Set to 0 to disable.", new AcceptableValueRange<float>(0, 100)));
         overpricedItemChance = config.Bind("General", "OverpricedItemChance", 0.5f, new ConfigDescription("Chance of an REALLY overpriced item to occur. Works per item. Set to 0 to disable.", new AcceptableValueRange<float>(0, 100)));
         overpricedItemMultiplier = config.Bind("General", "OverpricedItemMultiplier", 5f, new ConfigDescription("Multiplier applied to the overpriced item.", new AcceptableValueRange<float>(0, 10)));
+        disableVanillaPriceMultiplier = config.Bind("General", "DisableVanillaPriceMultiplier", false, "If enabled, mod will ignore vanilla game item value multiplier. This might be useful for easier playthrough.");
+
 
         basePriceMultiplier = config.Bind("Multipliers", "BasePriceMultiplier", 1f, new ConfigDescription("Base price multiplier applied to all items (e.g. price * multiplier). Set to 1 to disable.", new AcceptableValueRange<float>(-10, 10)));
         foreach (var item in Enum.GetValues(typeof(SemiFunc.itemType)))
