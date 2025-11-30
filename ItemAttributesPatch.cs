@@ -1,9 +1,8 @@
-﻿using HarmonyLib;
+﻿using BepInEx.Bootstrap;
+using HarmonyLib;
 using Photon.Pun;
 
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace AdvanceMyShop;
@@ -20,6 +19,15 @@ public class ItemAttributesPatch
         return source * (1f - multiplier / 100f);
     }
 
+    private static float? GetModdedItemValueMultiplier(Item item)
+    {
+        if (Chainloader.PluginInfos.ContainsKey("bulletbot.moreupgrades"))
+        {
+            return MoreUpgrades.Classes.MoreUpgradesAPI.ItemValueMultiplier(item);
+        }
+        return null;
+    }
+
     public static bool Prefix(ItemAttributes __instance)
     {
         if (GameManager.Multiplayer() && !PhotonNetwork.IsMasterClient)
@@ -28,7 +36,12 @@ public class ItemAttributesPatch
         }
 
         var baseValue = Utils.GetRandomNumber(__instance.itemValueMin, __instance.itemValueMax);
-        if (!PluginConfig.disableVanillaPriceMultiplier.Value)
+        var moddedMultiplier = GetModdedItemValueMultiplier(__instance.item);
+        if (moddedMultiplier.HasValue)
+        {
+            baseValue *= moddedMultiplier.Value;
+        }
+        else if (!PluginConfig.disableVanillaPriceMultiplier.Value)
             baseValue *= ShopManager.instance.itemValueMultiplier;
         baseValue = Mathf.Max(1000f, baseValue);
 

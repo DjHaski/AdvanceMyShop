@@ -1,3 +1,6 @@
+## 1.3.0
+- Introduced compatibility layer with `MoreUpgrades` mod. Huge thanks to **@BULLETBOT** for helping in problem investigation. Also big thanks to **@Yunogugu** and **@wnchapin2000-glitch** for problem confirmation.
+
 ## 1.2.0
 - Updated price calculation to match current game one.
 - Added config entry `DisableVanillaPriceMultiplier`, which disables vanilla item value multiplier. Might be useful for someone.

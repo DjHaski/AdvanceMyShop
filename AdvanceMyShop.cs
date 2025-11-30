@@ -1,11 +1,12 @@
 ﻿using BepInEx;
+using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 
 namespace AdvanceMyShop;
 
-[BepInPlugin("Dj_Haski.AdvanceMyShop", "AdvanceMyShop", "1.2.0")]
+[BepInPlugin("Dj_Haski.AdvanceMyShop", "AdvanceMyShop", "1.3.0")]
 public class AdvanceMyShop : BaseUnityPlugin
 {
     internal static AdvanceMyShop Instance { get; private set; } = null!;
@@ -26,6 +27,11 @@ public class AdvanceMyShop : BaseUnityPlugin
         Patch();
 
         Logger.LogInfo($"v{Info.Metadata.Version} is now injected in the game. Have fun :3");
+        if (Chainloader.PluginInfos.ContainsKey("bulletbot.moreupgrades"))
+        {
+            Logger.LogInfo($"Found 'MoreUpgrades' mod. Compatibility layer is enabled.");
+        }
+    
     }
 
     internal void Patch()

@@ -32,6 +32,10 @@ Mod was tested with `37` mods installed, including ones that change multipliers.
 
 Currently, it is known that AdvanceMyShop is incompatible with other mods that have similar or same functionality. You will have to choose who to keep ;)
 
+### Compatible with
+
+- [MoreUpgrades](https://thunderstore.io/c/repo/p/BULLETBOT/MoreUpgrades/) from BULLETBOT (since v1.3.0)
+
 ## Bugs and suggestions
 
 Feel free to open issue at [GitHub](https://github.com/DjHaski/AdvanceMyShop)!
