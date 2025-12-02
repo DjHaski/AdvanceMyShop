@@ -19,11 +19,17 @@ public class ItemAttributesPatch
         return source * (1f - multiplier / 100f);
     }
 
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    private static float GetMoreUpgradesItemValueMultiplier(Item item)
+    {
+        return MoreUpgrades.Classes.MoreUpgradesAPI.ItemValueMultiplier(item);
+    }
+
     private static float? GetModdedItemValueMultiplier(Item item)
     {
         if (Chainloader.PluginInfos.ContainsKey("bulletbot.moreupgrades"))
         {
-            return MoreUpgrades.Classes.MoreUpgradesAPI.ItemValueMultiplier(item);
+            return GetMoreUpgradesItemValueMultiplier(item);
         }
         return null;
     }
