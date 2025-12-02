@@ -1,3 +1,6 @@
+## 1.3.1
+- Fixed critical error due to incorrect way of handling compatibility with `MoreUpgrades` mod. Thanks to @hjy15802
+
 ## 1.3.0
 - Introduced compatibility layer with `MoreUpgrades` mod. Huge thanks to **@BULLETBOT** for helping in problem investigation. Also big thanks to **@Yunogugu** and **@wnchapin2000-glitch** for problem confirmation.
 
